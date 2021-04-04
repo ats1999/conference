@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import io from "socket.io-client";
 import CreateRoom from "./CreateRoom";
 import JoinRoom from "./JoinRoom";
-
+import Room from "./Room";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -30,7 +30,10 @@ function App() {
           <CreateRoom socket={socket} />
         </Route>
         <Route exact path="/join">
-          <JoinRoom />
+          <JoinRoom  socket={socket} />
+        </Route>
+        <Route exact path="/room/:id">
+          <Room socket={socket}/>
         </Route>
       </Switch>
     </Router>

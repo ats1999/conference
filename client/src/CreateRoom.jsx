@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from 'react'
+import {Link} from "react-router-dom";
 
 function CreateRoom({socket}) {
     const [roomId, setRoomId] = useState(null);
@@ -12,10 +13,14 @@ function CreateRoom({socket}) {
             <div id="room_id">
                 <code>{roomId}</code>
                 <hr/>
-                {roomId&&<code>
+                {roomId?<code>
                     Copy above room id and send it to your connections
-                </code>}
+                </code>:'Loading...'}
             </div>
+
+            {roomId && <Link className="join__button" to={`/room/${roomId}`}>
+                JOIN ROOM
+            </Link>}
         </div>
     )
 }

@@ -14,12 +14,14 @@ app.get('/',(_,res)=>{
 })
 
 io.on('connection',socket=>{
+    console.log('a socket connected');
     socket.on('join-room',(roomId,userId)=>{
+        console.log(`user ${userId} joined ${roomId}`);
         socket.join(roomId);
-        socket.to(roomId).broadcast.emit('user-connected',userId);
+        socket.to(roomId).emit('user-connected',userId);
         
         socket.on('disconnect', () => {
-            socket.to(roomId).broadcast.emit('user-disconnected', userId)
+            socket.to(roomId).emit('user-disconnected', userId)
         })
     })
 
